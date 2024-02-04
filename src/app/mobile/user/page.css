@@ -1,0 +1,76 @@
+.user-area {
+  width: 100%;
+  height: 21.33333333vw;
+  border-radius: 0 0 1.33333333vw 1.33333333vw;
+  display: flex;
+  align-items: center;
+  padding-left: 2.66666667vw;
+}
+.user-area img {
+  height: 13.33333333vw;
+  width: 13.33333333vw;
+  border-radius: 50%;
+}
+.user-area p {
+  margin-left: 2.66666667vw;
+}
+.user-order {
+  width: 100%;
+  height: 21.33333333vw;
+  background-color: #fff;
+  border-radius: 2.66666667vw 2.66666667vw 2.66666667vw 2.66666667vw;
+  padding-left: 2.66666667vw;
+}
+.user-order a {
+  margin-left: 56vw;
+  color: #708090;
+}
+.user-order .icon-order {
+  font-size: 4vw;
+}
+.user-order ul {
+  display: flex;
+  justify-content: space-around;
+}
+.user-order ul li a {
+  margin-left: 0;
+}
+.user-order ul li a i {
+  font-size: 6.66666667vw;
+}
+.user-order ul li a p {
+  font-size: 2.66666667vw;
+}
+.user-order ul li:nth-child(3) {
+  text-align: center;
+}
+.user-itemslist {
+  border-radius: 2.66666667vw 2.66666667vw 2.66666667vw 2.66666667vw;
+  margin-top: 2.66666667vw;
+  height: 53.33333333vw;
+  width: 100%;
+  background-color: #ffffff;
+}
+.user-itemslist ul {
+  padding-top: 4vw;
+  padding-left: 2.66666667vw;
+}
+.user-itemslist ul li {
+  height: 9.33333333vw;
+}
+.user-itemslist ul li .icon-right {
+  margin-left: 64vw;
+}
+.user-itemslist ul li span {
+  margin-right: 2.66666667vw;
+}
+.quit-login {
+  display: block;
+  margin-top: 4vw;
+  height: 10.66666667vw;
+  background-color: #fff;
+  border-radius: 2.66666667vw 2.66666667vw 2.66666667vw 2.66666667vw;
+  text-align: center;
+  line-height: 10.66666667vw;
+}
+/*# sourceMappingURL=page.css.map */

@@ -1,0 +1,31 @@
+.canteen-score-lists li {
+  margin-bottom: 2.66666667vw;
+  height: 24vw;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 2.66666667vw 2.66666667vw 2.66666667vw 2.66666667vw;
+}
+.canteen-score-lists li a {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  padding-top: 2.66666667vw;
+}
+.canteen-score-lists li a img {
+  vertical-align: top;
+  height: 80%;
+  width: 30%;
+}
+.canteen-score-lists li a div {
+  margin-left: 2.66666667vw;
+}
+.canteen-score-lists li a div .score {
+  display: inline-block;
+  margin-left: 2.13333333vw;
+}
+.canteen-score-lists li a .icon-right {
+  margin-left: 32vw;
+  margin-top: 5.33333333vw;
+  color: #708090;
+}
+/*# sourceMappingURL=page.css.map */

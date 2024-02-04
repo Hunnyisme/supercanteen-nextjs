@@ -1,0 +1,114 @@
+@rootsize:37.5vw;
+.Seller{
+
+}
+.background-img{
+  height: 800./@rootsize;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.mask{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height:  800./@rootsize;
+  background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3));
+}
+.sellerhead{
+  height: 1000./@rootsize;
+  position: relative;
+  background-color: #fff;
+  border-radius: 100./@rootsize 100./@rootsize 0 0;
+  padding-top: 50./@rootsize;
+  padding-left: 80./@rootsize;
+  //border-bottom: 1./@rootsize solid #708090;
+  img{
+    height: 350./@rootsize;
+    width: 350./@rootsize;
+    position: absolute;
+    right: 50./@rootsize;
+    top: -50./@rootsize;
+  }
+  .sales{
+    font-size: 80./@rootsize;
+    color: #708090;
+  }
+  .announcement-title{
+    margin-top: 20./@rootsize;
+    font-size: 120./@rootsize;
+  }
+  .announcement-content{
+    font-size: 80./@rootsize;
+  }
+}
+.tab-align{
+  background-color: #fff;
+  ul{
+    display: flex;
+    padding-left: 50./@rootsize;
+    li{
+      margin-right: 250./@rootsize;
+      cursor: pointer;
+    }
+
+  }
+}
+.tab_active{
+     border-bottom: #ffd700 solid 20./@rootsize;
+}
+.disabled{
+  display: none;
+}
+.nav-seller{
+  position: fixed;
+  z-index: 5;
+  padding-left: 50./@rootsize;
+   .icon-fanhui{
+
+     color: #ffffff;
+   }
+  .icon-favorites{
+    color: #ffffff;
+    margin-left: 2800./@rootsize;
+  }
+}
+.dish-tab
+{
+  display: flex;
+
+  .tab-vertical{
+    color:#696969;
+    height: 5000./@rootsize;
+    overflow-y: auto;
+    overflow-x: hidden;
+    li{
+      font-size: 130./@rootsize;
+      width: 800./@rootsize;
+      padding: 80./@rootsize;
+       cursor: pointer;
+    }
+
+  }
+  .dish-vertical{
+    overflow-y: auto;
+    background-color: #ffffff;
+    width: 100%;
+height: 6000./@rootsize;
+    li{
+      height: 800./@rootsize;
+      padding-left: 50./@rootsize;
+    }
+    h4{
+      font-size: 130./@rootsize;
+      padding-left: 50./@rootsize;
+      color: #696969;
+    }
+  }
+}
+
+.tab-vertical-active{
+  background-color: #ffffff;
+}

@@ -1,0 +1,103 @@
+.background-img {
+  height: 21.33333333vw;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 21.33333333vw;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+}
+.sellerhead {
+  height: 26.66666667vw;
+  position: relative;
+  background-color: #fff;
+  border-radius: 2.66666667vw 2.66666667vw 0 0;
+  padding-top: 1.33333333vw;
+  padding-left: 2.13333333vw;
+}
+.sellerhead img {
+  height: 9.33333333vw;
+  width: 9.33333333vw;
+  position: absolute;
+  right: 1.33333333vw;
+  top: -1.33333333vw;
+}
+.sellerhead .sales {
+  font-size: 2.13333333vw;
+  color: #708090;
+}
+.sellerhead .announcement-title {
+  margin-top: 0.53333333vw;
+  font-size: 3.2vw;
+}
+.sellerhead .announcement-content {
+  font-size: 2.13333333vw;
+}
+.tab-align {
+  background-color: #fff;
+}
+.tab-align ul {
+  display: flex;
+  padding-left: 1.33333333vw;
+}
+.tab-align ul li {
+  margin-right: 6.66666667vw;
+  cursor: pointer;
+}
+.tab_active {
+  border-bottom: #ffd700 solid 0.53333333vw;
+}
+.disabled {
+  display: none;
+}
+.nav-seller {
+  position: fixed;
+  z-index: 5;
+  padding-left: 1.33333333vw;
+}
+.nav-seller .icon-fanhui {
+  color: #ffffff;
+}
+.nav-seller .icon-favorites {
+  color: #ffffff;
+  margin-left: 74.66666667vw;
+}
+.dish-tab {
+  display: flex;
+}
+.dish-tab .tab-vertical {
+  color: #696969;
+  height: 133.33333333vw;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.dish-tab .tab-vertical li {
+  font-size: 3.46666667vw;
+  width: 21.33333333vw;
+  padding: 2.13333333vw;
+  cursor: pointer;
+}
+.dish-tab .dish-vertical {
+  overflow-y: auto;
+  background-color: #ffffff;
+  width: 100%;
+  height: 160vw;
+}
+.dish-tab .dish-vertical li {
+  height: 21.33333333vw;
+  padding-left: 1.33333333vw;
+}
+.dish-tab .dish-vertical h4 {
+  font-size: 3.46666667vw;
+  padding-left: 1.33333333vw;
+  color: #696969;
+}
+.tab-vertical-active {
+  background-color: #ffffff;
+}
+/*# sourceMappingURL=page.css.map */
