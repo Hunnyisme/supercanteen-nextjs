@@ -108,6 +108,7 @@ const display_style={
                                 if(res.data.status_code===200){
                                     localStorage.setItem('token',res.data.data.token);
                                     localStorage.setItem('account',res.data.data.account)
+                                    localStorage.setItem('userid',res.data.data.id)
                                     location.href='/mobile'
                                 }else{
 

@@ -5,37 +5,51 @@ import Link from "next/link";
 import Footer from "@/components/footer";
 import Footer2 from "@/components/footer2";
 import api from "@/Utils/axios_init";
-import {useRouter} from "next/router";
+import {useEffect, useState} from 'react';
 export default function Page() {
-    const userName = 'user';
-    const token= localStorage.getItem('token')
 
+    const token= localStorage.getItem('token')
+       const [userInfo,set_userInfo]=useState({name:'user'})
     // const router=useRouter()
+    function doLogOut(){
+        try {
+            api.get("/user/logout",{
+                params:{
+                    account:String(localStorage.getItem('account'))
+                }
+            }).then(res=>{
+                if(res.data.status_code==200){
+                    localStorage.removeItem('account')
+                    localStorage.removeItem('token')
+                    location.href="/mobile/user"
+                }
+            })
+        }catch (e){
+            console.log(e)
+        }
+
+    }
           if(token != null){
-                api.get("/user").then(res=>{
-                    console.log(res.data)
-                })
-              function doLogOut(){
-                    api.get("/user/logout",{
-                        params:{
-                            account:String(localStorage.getItem('account'))
-                        }
-                    }).then(res=>{
-                        if(res.data.status_code==200){
-                            localStorage.removeItem('account')
-                            localStorage.removeItem('token')
-                            location.href="/mobile/user"
-                        }
-                    })
-              }
+              useEffect(()=>{
+                  try {
+                      api.get("/user").then(res=>{
+                          set_userInfo(res.data.data)
+                          console.log(res)
+                      })
+                  }catch (e){
+                      console.log(e)
+                  }
+
+              },[])
+
               return (
                   <>
                       <div className={'user-area'}>
                           <img src={'/upload/user/aniya.png'}/>
-                          <p><strong>{userName}</strong></p>
+                          <p><strong>{userInfo.name}</strong></p>
                       </div>
                       <div className={'user-order'}>
-                          <span><i className={'iconfont icon-order'}></i>订单</span><Link href={'#'}><span>全部订单<i
+                          <span><i className={'iconfont icon-order'}></i>订单</span><Link href={'/mobile/deal'}><span>全部订单<i
                           className={'iconfont icon-right'}></i></span></Link>
                           <ul >
                               <li ><Link href={'#'}><i className={'iconfont icon-money-wallet'}></i><p>待支付</p></Link></li>

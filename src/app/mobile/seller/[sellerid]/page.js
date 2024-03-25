@@ -1,90 +1,89 @@
 'use client'
 import './page.css';
-import {useState} from "react";
-import {useRef} from "react";
-import '/public/iconfont/iconfont.css'
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import {generateUUID} from "@/Utils/utils";
-export  default function Page({params}){
-  const sellerid=params.sellerid;
- const bgi="/upload/sellerbgi.jpeg";
- const [tabstate,settabstate]=useState(0);
- const [category_tab_sate,set_category_tab_state]=useState(0);
- const tab_list=[{
-     id:0,
-     name:'黑糖蒸煮奶茶系列'
- },
-     {
-         id:1,
-         name: '荤菜'
-     },
-     {
-         id:2,
-         name:'素菜'
-     },
-     {
-         id:3,
-         name:'主食'
-     },
-     {
-         id:4,
-         name:'主食'
-     },
-     {
-         id:5,
-         name:'主食'
-     },
-     {
-         id:6,
-         name:'主食'
-     },
-     {
-         id:7,
-         name:'主食'
-     },
-     {
-         id:8,
-         name:'主食'
-     },
-     {
-         id:9,
-         name:'主食'
-     }
-     ,
-     {
-         id:10,
-         name:'主食'
-     }
-     ,
-     {
-         id:11,
-         name:'主食'
-     }
- ];
- const meal_list=[{id:0,cate_id:0,cate_name:'黑糖蒸煮奶茶系列',meals:1,img:''},{id:1,cate_id:0,cate_name:'黑糖蒸煮奶茶系列',meals:2,img:''},{id:2,cate_id:0,cate_name:'黑糖蒸煮奶茶系列',meals:3,img:''},
-     {id:3,cate_id:0,cate_name:'黑糖蒸煮奶茶系列',meals:4,img:''},{id:4,cate_id:0,cate_name:'黑糖蒸煮奶茶系列',meals:5,img:''},{id:5,cate_id:0,cate_name:'黑糖蒸煮奶茶系列',meals:6,img:''},{id:6,cate_id:0,cate_name:'黑糖蒸煮奶茶系列',meals:7,img:''},{id:7,cate_id:1,cate_name:'荤菜',meals:8,img:''},
-     {id:8,cate_id:1,cate_name:'荤菜',meals:9,img:''},
-     {id:9,cate_id:1,cate_name:'荤菜',meals:9,img:''},
-     {id:10,cate_id:1,cate_name:'荤菜',meals:9,img:''},
-     {id:11,cate_id:1,cate_name:'荤菜',meals:9,img:''}
- ]
- const show_tab_list=tab_list.map(e=>
-     <li key={e.id} id={e.id} className={category_tab_sate===e.id?'tab-vertical-active':''}>{e.name}</li>
- );
-    const cate_refs=[];
- const show_meal_list=[];
-  for(let i=0;i<tab_list.length;i++){
-   cate_refs.push(useRef(null))
- show_meal_list.push(<h4 key={generateUUID()} ref={cate_refs[i]}>{tab_list[i].name}</h4>);
-const list=meal_list.filter(e=>e.cate_id===tab_list[i].id)
-      for(let j=0;j<list.length;j++){
-          show_meal_list.push(<li key={generateUUID()}>{list[j].meals}</li>)
-      }
-  }
+import api from "@/Utils/axios_init";
+import {List, message} from 'antd';
+
+export default function Page({ params }) {
+    const sellerid = params.sellerid;
+    const bgi = "/upload/sellerbgi.jpeg";
+    const [tabstate, settabstate] = useState(0);
+    const [dishandcatelist, setdishandcatelist] = useState([]);
+    const [messageApi, contextHolder] = message.useMessage();
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await api.get("/dish/show", { params: { storeid: Number(sellerid) } });
+                const data = res.data.data;
+                console.log(data)
+                const newDataList = await Promise.all(data.map(async (item) => {
+                    const dish = item[0];
+                    const dishData = item[1];
+                    const dishList = await Promise.all(dishData.map(async (dishItem) => {
+                        try {
+                            const res = await api.get("/file", {
+                                params: {
+                                    filename: String(dishItem.picture)
+                                },
+                                responseType: 'arraybuffer'
+                            });
+                            const blob = new Blob([new Uint8Array(res.data)]);
+                            const imgUrl = URL.createObjectURL(blob);
+                            return {
+                                id: dishItem.id,
+                                imgUrl: imgUrl,
+                                name: dishItem.name,
+                            };
+                        } catch (error) {
+                            console.error('Error fetching dish image:', error);
+                            return null;
+                        }
+                    }));
+                    return [dish, ...dishList];
+                }));
+                setdishandcatelist(newDataList.flat());
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, [sellerid]);
+function addCart(e){
+    console.log(e.target.id)
+    api.get('/cart',{
+            params:{
+                dishid:Number(e.target.id),
+                userid:Number(localStorage.getItem('userid'))
+            }
 
 
-    return(
+    }).then(res=>{
+        messageApi.open({
+            type:'success',
+            content:'添加购物车成功'
+        })
+    })
+
+}
+    const show_dish_list = (
+        <List
+            size="small"
+            dataSource={dishandcatelist}
+            renderItem={item => {
+                if (!item.hasOwnProperty('imgUrl')) {
+                    return <p>{item.name}</p>
+                } else {
+                    return <List.Item><img src={item.imgUrl} style={{height:'50px',width:'50px'}} alt=""/>{item.name}<Link id={item.id} onClick={addCart} href={'#'} style={{color:'blue'}}>添加</Link></List.Item>
+                }
+            }}
+        />
+    )
+
+    return (
+
         <div className={'Seller'}>
+            {contextHolder}
             <div className="nav-seller">
                 <Link href={'/mobile'}><i className={'iconfont icon-fanhui'}></i></Link>
                 <Link href={'/mobile'}><i className={'iconfont icon-favorites'}></i></Link>
@@ -102,24 +101,14 @@ const list=meal_list.filter(e=>e.cate_id===tab_list[i].id)
             </div>
             <div className="tab-align ">
                 <ul>
-                    <li className={tabstate===0?'tab_active':''} onClick={event => settabstate(0)}>点菜</li>
-                    <li className={tabstate===1?'tab_active':''} onClick={event => settabstate(1)}>评价</li>
+                    <li className={tabstate === 0 ? 'tab_active' : ''} onClick={event => settabstate(0)}>点菜</li>
+                    <li className={tabstate === 1 ? 'tab_active' : ''} onClick={event => settabstate(1)}>评价</li>
                 </ul>
             </div>
-            <div className={tabstate===0?'dish-tab':'disabled'}>
-                <ul className={'tab-vertical'} onClick={event =>{ set_category_tab_state(Number(event.target.id));
-                    const options={
-
-                    };
-                     cate_refs[Number(event.target.id)].current.scrollIntoView(options)
-                }}>
-                    {show_tab_list}
-                </ul>
-                <ul className={'dish-vertical'}>
-                    {show_meal_list}
-                </ul>
+            <div className={tabstate === 0 ? 'comment-tab' : 'disabled'}>
+                {show_dish_list}
             </div>
-            <div className={tabstate===1?'comment-tab':'disabled'}>
+            <div className={tabstate === 1 ? 'comment-tab' : 'disabled'}>
                 2
             </div>
         </div>

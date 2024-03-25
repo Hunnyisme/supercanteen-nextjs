@@ -17,7 +17,7 @@ export default function Page() {
     window.location.href="http://localhost:3000/mobile"
   }else{
     // 跳转到PC端页面
-    window.location.href = "http://localhost:3000/pc"
+    window.location.href = "http://localhost:3000/pc/admin"
   }
 
   return (

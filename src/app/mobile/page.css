@@ -66,6 +66,10 @@
   text-align: center;
   font-size: 4vw;
 }
+.suggest-store-slide img {
+  height: 16vw;
+  width: 16vw;
+}
 .showmeal {
   margin-top: 2.66666667vw;
   width: 100%;

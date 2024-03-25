@@ -9,11 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "antd": "^5.13.1",
+    "antd": "^5.15.0",
     "axios": "^1.6.5",
+    "module": "^1.1.0",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
     "swiper": "^11.0.5"
-  }
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
+  "stream": false,
+  "util": false,
+  "http": false,
+  "crypto": false,
+  "https": false,
+  "zlib": false
 }
