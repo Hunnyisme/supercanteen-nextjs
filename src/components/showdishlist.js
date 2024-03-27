@@ -46,8 +46,8 @@ export default function Showdishlist({dishlist}){
                 <li key={data.id} style={{marginTop:'10px'}}>
                     {data.imgUrl ? <Image preview={true} src={data.imgUrl} style={{height:'60px',width:'60px',marginRight:'10px'}}  alt={''}/> : <span>无图片</span>}
                     <span >{data.name}</span>
-                     <span style={{position:'relative',left:'850px'}}>{data.price}元</span>
-                    <Link href={'#'} style={{color:'skyBlue',position:'relative',left:'900px'}} onClick={(e)=>{
+                     <span style={{position:'relative',left:'750px'}}>{data.price}元</span>
+                    <Link href={'#'} style={{color:'skyBlue',position:'relative',left:'800px'}} onClick={(e)=>{
                         api.delete('/dish',{
                             params:{
                                 id:Number(data.id)

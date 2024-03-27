@@ -11,13 +11,6 @@ export default function Page({params}){
     const [storeData,setStoreData]=useState({})
    const storeId=params.storeId
     const [evas,setevas]=useState([])
-const canteen_info={
-    id:0,
-    img:[{img_id:0,url:'/upload/canteen/thefirst.jpeg'}],
-    name:'华商第一食堂',
-    phone:'19333333',
-    address:'华商街1号'
-};
     useEffect(() => {
         const fetchdata=async ()=>{
              const res=await api.get('/store/one',{params:{storeId: storeId}})
@@ -32,23 +25,6 @@ const canteen_info={
 
         fetchdata()
     }, []);
-// const show_img=canteen_info.img.map(e=>
-//     <li key={canteen_info.img.img_id}><img src={e.url} alt=""/></li>
-// )
-//     const show_comment=evas.map(item=>{
-//         return(
-//             <List
-//                 dataSource={evas}
-//                 bordered
-//                 renderItem={(i) => {
-//                     return<>
-//                         <List.Item></List.Item>
-//                         <List.Item> {i.textComment}</List.Item>
-//                     </>
-//                 }}
-//             />
-//         )
-//     })
     return(
         <>
             <div className="header-evaluation">

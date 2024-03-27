@@ -1,20 +1,19 @@
 'use client'
-import './page.css'
-import Footer2 from "@/components/footer2";
-import Link from "next/link";
-import '/public/iconfont/iconfont.css'
-import {useEffect, useState} from "react";
 import api from "@/Utils/axios_init";
+import Link from "next/link";
+import Footer2 from "@/components/footer2";
+import {useEffect, useState} from "react";
+import './page.css'
 export default function Page(){
     const [storeList,setstoreList]=useState([])
     const [imgstoreList,setimgstoreList]=useState([])
 
-useEffect(()=>{
-    const fetchdata=async ()=>{
-        const res=await api.get('/store')
-        const data=res.data.data
-        setstoreList(data)
-        console.log(res.data.data)
+    useEffect(()=>{
+        const fetchdata=async ()=>{
+            const res=await api.get('/store')
+            const data=res.data.data
+            setstoreList(data)
+            console.log(res.data.data)
             const imgStoreList=await Promise.all(data.map(async item => {
                 const res=  await api.get("/store/pic", {
                     params: {
@@ -38,28 +37,31 @@ useEffect(()=>{
                 }
             }))
 
-        setimgstoreList(imgStoreList)
-        console.log(imgStoreList)
+            setimgstoreList(imgStoreList)
+            console.log(imgStoreList)
 
-    }
-    fetchdata()
+        }
+        fetchdata()
 
-},[])
-const show_canteen_lists=imgstoreList.map(e=>
-    <li key={e.id}>
-        <Link href={'/mobile/evaluation/'+e.id}><img src={e.imgUrl} alt=""/>
-            <div><p>{e.name}</p>
-                <p>得分:<span className={'score'}>{e.overallScore}/10</span></p></div>
-            <span className={'iconfont icon-right'}></span>
-        </Link>
-    </li>
-)
+    },[])
+    const show_canteen_lists=imgstoreList.map(e=>
+        <li key={e.id}>
+            <Link href={'/mobile/seller/'+e.id}><img src={e.imgUrl} alt=""/>
+                <div><p>{e.name}</p>
+                   </div>
+                <span className={'iconfont icon-right'}></span>
+            </Link>
+        </li>
+    )
     return (
         <>
+            <Link href={'/mobile'}><i className={'iconfont icon-fanhui'}></i></Link>
             <ul className={'canteen-score-lists'}>
                 {show_canteen_lists}
-           </ul>
-  <Footer2 initNum={1}></Footer2>
+            </ul>
+            {/*<Footer2 initNum={1}></Footer2>*/}
         </>
     )
+
+
 }

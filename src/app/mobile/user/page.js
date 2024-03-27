@@ -32,7 +32,7 @@ export default function Page() {
           if(token != null){
               useEffect(()=>{
                   try {
-                      api.get("/user").then(res=>{
+                      api.get("/user",{params:{userid:localStorage.getItem('userid')}}).then(res=>{
                           set_userInfo(res.data.data)
                           console.log(res)
                       })

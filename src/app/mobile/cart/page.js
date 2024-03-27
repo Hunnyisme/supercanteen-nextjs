@@ -77,14 +77,14 @@ export  default function Page(){
                                                 <img src={i.imgUrl}
                                                                    style={{height: '50px', width: '50px',}}
                                                                    alt=""/>{i.name}
-                                                <Link rel="stylesheet" style={{color:'blue',marginLeft:'80px',marginRight:'5px'}} href="#">
+                                                <span style={{position:'absolute',right:'90px',marginTop:'10px'}}> <Link rel="stylesheet" style={{color:'blue',marginLeft:'80px',marginRight:'5px'}} href="#">
                                                 减少</Link>
-                                            {
-                                                countValue
-                                            }
-                                            <Link rel="stylesheet" style={{color:'blue',marginLeft:'5px'}} href="#">
-                                            增加 < /Link>
-                                                <span style={{marginLeft:'40px'}}>{i.price*i.count}元</span>
+                                                    {
+                                                        countValue
+                                                    }
+                                                    <Link rel="stylesheet" style={{color:'blue',marginLeft:'5px'}} href="#">
+                                            增加 < /Link></span>
+                                                <span style={{position:'absolute',right:'10px',marginTop:'10px'}}>{i.price*i.count}元</span>
                                             </Checkbox>
                                         </List.Item>
 
@@ -97,7 +97,7 @@ export  default function Page(){
                           }
                       >
                       </List>
-                     <Button onClick={doPost}>下单</Button>
+                     <Button style={{marginLeft:'45%'}} onClick={doPost}>下单</Button>
         </>
     )
 

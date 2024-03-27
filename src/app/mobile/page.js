@@ -15,6 +15,7 @@ export default function Page(){
     const[storeImgDataList,setStoreImgDataList]=useState([])
     const[dishImgDataList,setdishImgDataList]=useState([])
     const [car_count,setcar_count]=useState(0)
+    const [storeId,setStoreId]=useState(0)
 window.addEventListener('scroll',(e)=>{
     if(window.innerHeight+window.scrollY>=document.body.scrollHeight)
         console.log('到底')
@@ -75,7 +76,8 @@ let carousels=['carousel1.png','carousel2.png']
                     });
                     const blob = new Blob([res.data]);
                     const imgUrl = URL.createObjectURL(blob);
-                    return { id: item.id, imgUrl: imgUrl, name: item.name, price: item.price };
+                    const res2 = await api.get('/store/bydish',{params:{dishId:item.id}})
+                    return { id: item.id, imgUrl: imgUrl, name: item.name, price: item.price,store:res2.data.data.id };
                 }));
                 setdishImgDataList(newDataList);
             } catch (error) {
@@ -108,8 +110,16 @@ const show_suggest_store_list=storeImgDataList.map((store)=>
      </Link></div>
  </SwiperSlide>
 );
-    const show_dish_list=dishImgDataList.map(dish=>
-        <li key={dish.id}><a href={'#'}><img src={dish.imgUrl} alt={''}/><p>{dish.name}</p></a></li>
+
+    const show_dish_list=dishImgDataList.map(dish=> {
+           // api.get('/store/bydish',{params:{dishId:dish.id}}).then(res=>{
+           //     const data=res.data.data
+           //     setStoreId(data.id)
+           // })
+
+           return <li key={dish.id}><Link href={'/mobile/seller/'+dish.store}><img src={dish.imgUrl} alt={''}/><p>{dish.name}</p></Link></li>
+
+        }
     )
 
 //const show_meal_list=showMealList.map(meal=><li key={meal.id}><a href={'#'}><img src={meal.img}/><p>{meal.name}</p></a></li>);
@@ -139,7 +149,7 @@ console.log(car_count)
           <div className="suggestshop">
               <div className="suggestshop-head">
                   <h4>店铺推荐</h4>
-                  <Link href={'#'}>全部<span className={'iconfont icon-right'}></span></Link>
+                  <Link href={'/mobile/seller'}>全部<span className={'iconfont icon-right'}></span></Link>
               </div>
               <Swiper
                   modules={[Autoplay]}

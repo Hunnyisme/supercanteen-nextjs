@@ -131,7 +131,7 @@ export  default function Page({params}){
         <>
             {contextHolder}
             <h2 style={{marginLeft: '40%'}}>您正在管理{cateName}分组</h2>
-            <Button style={{marginLeft: '1000px'}} onClick={showModal}>添加菜品</Button>
+            <Button style={{marginLeft: '800px'}} onClick={showModal}>添加菜品</Button>
            <Showdishlist dishlist={dishlist}></Showdishlist>
             <Modal
                 title="请输入菜品信息"

@@ -7,13 +7,26 @@ import {List, message} from 'antd';
 
 export default function Page({ params }) {
     const sellerid = params.sellerid;
+    const [store,setStore]=useState({})
     const bgi = "/upload/sellerbgi.jpeg";
     const [tabstate, settabstate] = useState(0);
     const [dishandcatelist, setdishandcatelist] = useState([]);
     const [messageApi, contextHolder] = message.useMessage();
+    const [storeImg,setStoreImg]=useState("")
     useEffect(() => {
         const fetchData = async () => {
             try {
+                const storeRes=await api.get('/store/one',{params:{storeId:sellerid}})
+                setStore(storeRes.data.data)
+                const PicRes=  await api.get("/store/pic", {
+                    params: {
+                        iconAddress: encodeURIComponent(storeRes.data.data.iconAddress)
+                    },
+                    responseType: 'arraybuffer'
+                });
+                const blob = new Blob([new Uint8Array(PicRes.data)]);
+                const imgUrl = URL.createObjectURL(blob);
+                setStoreImg(imgUrl)
                 const res = await api.get("/dish/show", { params: { storeid: Number(sellerid) } });
                 const data = res.data.data;
                 console.log(data)
@@ -93,11 +106,11 @@ function addCart(e){
             <div className="mask">
             </div>
             <div className="sellerhead">
-                <h3>麦当劳</h3>
-                <img src="/upload/storeimg/m.png" alt=""/>
+                <h3>{store.name}</h3>
+                <img src={storeImg} alt=""/>
                 <p className={'sales'}>月售1000+</p>
                 <p className={'announcement-title'}>公告</p>
-                <p className={'announcement-content'}>12121212121212</p>
+                <p className={'announcement-content'}>{store.profile}</p>
             </div>
             <div className="tab-align ">
                 <ul>

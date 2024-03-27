@@ -117,7 +117,7 @@ const item_style={
                                     localStorage.setItem('token',res.data.data.token);
                                     localStorage.setItem('account',res.data.data.account)
                                     localStorage.setItem('sotreName',res.data.data.storeName)
-                                    location.href='/pc/admin/board/category'
+                                    location.href='/pc/board/category'
                                 }else{
                                     openAlert(res.data.mess)
 

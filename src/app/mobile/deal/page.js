@@ -19,8 +19,6 @@ useEffect(()=>{
         console.log(detaildata)
         setdetaillist(detaildata)
     }
-
-
               fetchdata()
 },[])
 console.log(deallist)
@@ -44,7 +42,6 @@ console.log(deallist)
                     return i.map(i=>{
                           if(i.dealsId==item.dealId)
                         return <List.Item><span>{i.dishName}</span><span>数量:{i.quantity}</span><span>小计:{i.subtotal}</span></List.Item>
-
                     })
                 }}
             />
@@ -52,22 +49,6 @@ console.log(deallist)
             </>
         )
     })
-
-    // const showList2=deallist.map(item=>{
-    //
-    //  const details=  detaillist.filter(i=>i['dealsId']==item.dealId)
-    //   return    details.map(i=>{
-    //                     i.map(i=>
-    //       {
-    //           return (
-    //               <>
-    //                   <div>{item.storeName}</div>
-    //                   <div>{i['dishName']}</div>
-    //               </>
-    //           )
-    //       })
-    //      })
-    // }
     const showList2=detaillist.map(item=>{
         return item.map(item=>{
 
